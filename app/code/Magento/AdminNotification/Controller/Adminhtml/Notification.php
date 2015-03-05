@@ -20,7 +20,7 @@ class Notification extends \Magento\Backend\App\AbstractAction
                 break;
 
             case 'massMarkAsRead':
-                $acl = 'Magento_AdminNotification::mark_as_read';
+                $acl = 'Magento_AdminNotification::mark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_readmark_as_read';
                 break;
 
             case 'remove':
