@@ -973,7 +973,10 @@ class Carrier extends \Magento\Dhl\Model\AbstractDhl implements \Magento\Shippin
 
         $nodeBkgDetails = $nodeGetQuote->addChild('BkgDetails');
         $nodeBkgDetails->addChild('PaymentCountryCode', $rawRequest->getOrigCountryId());
-        $nodeBkgDetails->addChild('Date', $this->_dateTime->now(true));
+        $nodeBkgDetails->addChild(
+            'Date',
+            (new \DateTime())->format(\Magento\Framework\Stdlib\DateTime::DATETIME_PHP_FORMAT)
+        );
         $nodeBkgDetails->addChild('ReadyTime', 'PT' . (int)(string)$this->getConfigData('ready_time') . 'H00M');
 
         $nodeBkgDetails->addChild('DimensionUnit', $this->_getDimensionUnit());
@@ -1031,7 +1034,7 @@ class Carrier extends \Magento\Dhl\Model\AbstractDhl implements \Magento\Shippin
 
         if (strlen(trim($response)) > 0) {
             if (strpos(trim($response), '<?xml') === 0) {
-                $xml = simplexml_load_string($response);
+                $xml = $this->parseXml($response, 'Magento\Shipping\Model\Simplexml\Element');
                 if (is_object($xml)) {
                     if (in_array($xml->getName(), ['ErrorResponse', 'ShipmentValidateErrorResponse'])
                         || isset($xml->GetQuoteResponse->Note->Condition)
@@ -1772,7 +1775,7 @@ class Carrier extends \Magento\Dhl\Model\AbstractDhl implements \Magento\Shippin
         $resultArr = [];
 
         if (strlen(trim($response)) > 0) {
-            $xml = simplexml_load_string($response);
+            $xml = $this->parseXml($response, 'Magento\Shipping\Model\Simplexml\Element');
             if (!is_object($xml)) {
                 $errorTitle = __('Response is in the wrong format');
             }

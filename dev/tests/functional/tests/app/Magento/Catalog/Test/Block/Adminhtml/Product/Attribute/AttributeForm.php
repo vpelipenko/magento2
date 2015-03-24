@@ -6,15 +6,15 @@
 
 namespace Magento\Catalog\Test\Block\Adminhtml\Product\Attribute;
 
-use Magento\Backend\Test\Block\Widget\Tab;
 use Magento\Backend\Test\Block\Widget\FormTabs;
-use Magento\Mtf\Client\BrowserInterface;
-use Magento\Mtf\Client\Element\SimpleElement;
-use Magento\Mtf\Client\Element;
-use Magento\Mtf\Client\Locator;
-use Magento\Mtf\Fixture\FixtureInterface;
+use Magento\Backend\Test\Block\Widget\Tab;
 use Magento\Mtf\Block\BlockFactory;
 use Magento\Mtf\Block\Mapper;
+use Magento\Mtf\Client\BrowserInterface;
+use Magento\Mtf\Client\Element;
+use Magento\Mtf\Client\Element\SimpleElement;
+use Magento\Mtf\Client\Locator;
+use Magento\Mtf\Fixture\FixtureInterface;
 use Magento\Mtf\Util\XmlConverter;
 
 /**
@@ -112,6 +112,5 @@ class AttributeForm extends FormTabs
     public function saveAttributeForm()
     {
         $this->browser->find($this->saveButton)->click();
-        $this->browser->selectWindow();
     }
 }
